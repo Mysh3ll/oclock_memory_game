@@ -18,5 +18,7 @@ import bootstrap from "bootstrap";
 
 // Exécuter quand le document est ready
 $(document).ready(function () {
-    console.log('hello from document')
+    console.log('hello from document');
+
+    
 });
