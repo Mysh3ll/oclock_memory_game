@@ -73,7 +73,7 @@ Encore
     // Intégration des images statiques
     .copyFiles({
         from: './assets/images',
-        to: 'images/[path][name].[hash:8].[ext]',
+        to: 'images/[path][name].[ext]',
     })
     // Transformation du css pour l'ensemble des navigateurs
     .enablePostCssLoader((options) => {

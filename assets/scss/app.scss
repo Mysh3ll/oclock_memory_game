@@ -3,8 +3,8 @@
 
 
 // Customisation des variables bootstrap
-$primary: #a4c5fc;
-$secondary: #85d2e0;
+$primary: #00c4a8;
+$secondary: #fefed8;
 $success: #acfca4;
 $info: #c3a4fc;
 $warning: #fce4a4;
@@ -25,19 +25,23 @@ $body-bg: #f8fafc;
   box-sizing: border-box;
   letter-spacing: 1px;
 }
+
 body {
   background: url('../images/background.jpg');
   background-size: cover;
 }
+
 h1 {
   font-size: 48px;
   margin: 15px 0;
   color: #fff;
 }
+
 .container {
   width: 1080px;
   margin: 25px auto;
 }
+
 .card {
   height: 150px;
   width: 113px;
@@ -48,24 +52,35 @@ h1 {
   box-shadow: 5px 5px 10px #261600;
   background-image: url('../images/card-back.jpg');
   background-size: cover;
+
+  :hover {
+    cursor: pointer;
+    border: 5px solid $primary;
+    box-shadow: 0 0 20px 3px $primary;
+  }
+
+  .selected {
+    border: 5px solid $primary;
+    box-shadow: 0 0 20px 3px $primary;
+    transform: rotateY(180deg);
+    transition: 0.5s;
+  }
 }
-.card:hover {
-  cursor: pointer;
-  border: 5px solid #ffeaa0;
-  box-shadow: 0 0 20px 3px #ffeaa0;
-}
-.card.selected {
-  border: 5px solid #ffeaa0;
-  box-shadow: 0 0 20px 3px #ffeaa0;
-  transform: rotateY(180deg);
-  transition: 0.5s;
-}
-.shake {
-  animation-name: shake;
-  animation-duration: .5s;
-}
-@keyframes shake {
-  0%, 100% {transform: translateX(0);}
-  20%, 60% {transform: translateX(-30px);}
-  40%, 80% {transform: translateX(30px);}
+
+// Progressbar
+#progressBar {
+  width: 90%;
+  margin: 10px 22px;
+  height: 22px;
+  background-color: $primary;
+
+  div {
+    height: 100%;
+    text-align: right;
+    padding: 0 10px;
+    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+    width: 0;
+    background-color: $secondary;
+    box-sizing: border-box;
+  }
 }
