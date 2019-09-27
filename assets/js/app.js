@@ -71,7 +71,6 @@ $(document).ready(function () {
         },
         checkWinGame: () => {
             if ($('.unselected').length === 0) {
-                $('.results').show();
                 const endTime = new Date();
                 const time = Math.round((endTime - app.startTime) / 1000);
                 console.log('Tu as gagné en ' + time + ' seconds');
