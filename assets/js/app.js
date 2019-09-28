@@ -26,6 +26,8 @@ $(document).ready(function () {
             app.startGame();
         },
         startGame: () => {
+            $('.container').show();
+            app.progressBar(300, 300, $('#progress-bar'));
             app.clickHandlerCard();
             app.startTime = new Date();
             console.log(app.startTime);
@@ -76,22 +78,24 @@ $(document).ready(function () {
                 console.log('Tu as gagné en ' + time + ' seconds');
             }
         },
+        progressBar: (timeleft, timetotal, $element) => {
+            const progressBarWidth = timeleft * $element.width() / timetotal;
+            $element.find('div').animate({width: progressBarWidth}, 500).html(Math.floor(timeleft / 60) + ":" + timeleft % 60);
+            if (timeleft >= 0) {
+                setTimeout(() => {
+                    if (timeleft !== 0) {
+                        app.progressBar(timeleft - 1, timetotal, $element);
+                    } else {
+                        alert('fin');
+                    }
+                }, 1000);
+            }
+        },
     };
 
-    const progress=(timeleft, timetotal, $element) => {
-        const progressBarWidth = timeleft * $element.width() / timetotal;
-        $element.find('div').animate({width: progressBarWidth}, 500).html(Math.floor(timeleft / 60) + ":" + timeleft % 60);
-        if (timeleft >= 0) {
-            setTimeout(() => {
-                if (timeleft !== 0) {
-                    progress(timeleft - 1, timetotal, $element);
-                } else {
-                    alert('fin');
-                }
-            }, 1000);
-        }
-    };
-
-    app.init();
-    progress(300, 300, $('#progressBar'));
+    // Start Game
+    $('#start-game').on('click', () => {
+        $('.top-scores').hide();
+        app.init();
+    });
 });
