@@ -12,11 +12,14 @@
     <div class="top-scores">
         <h2>Top Scores</h2>
         <ul class="highscores">
-            <li>1 - 1000</li>
-            <li>2 - 2000</li>
-            <li>3 - 3000</li>
-            <li>4 - 4000</li>
-            <li>5 - 5000</li>
+            {% if scores is not empty %}
+                {% for score in scores %}
+                <li>{{ loop.index }} - {{ score.score|date('H:i:s', '+00:00 GMT') }}</li>
+                {% endfor %}
+            {% else %}
+                Pas de HighScore <br>
+                alors vaz-y fonce !
+            {% endif %}
         </ul>
 
         <input id="start-game" type="button" value="Start Game">
