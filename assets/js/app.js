@@ -27,7 +27,7 @@ $(document).ready(function () {
         },
         startGame: () => {
             $('.container').show();
-            app.progressBar(5, 5, $('#progress-bar'));
+            app.progressBar(600, 600, $('#progress-bar'));
             app.clickHandlerCard();
             app.startTime = new Date();
             console.log(app.startTime);
@@ -75,7 +75,7 @@ $(document).ready(function () {
             if ($('.unselected').length === 0) {
                 const endTime = new Date();
                 const time = Math.round((endTime - app.startTime) / 1000);
-                app.endGame('Hey Good Job ! Tu as gagné en ' + time + ' secondes');
+                app.endGame('Hey Good Job ! Tu as gagné en ' + time + ' secondes', true, time);
                 // console.log('Tu as gagné en ' + time + ' seconds');
             }
         },
@@ -87,16 +87,38 @@ $(document).ready(function () {
                     if (timeleft !== 0) {
                         app.progressBar(timeleft - 1, timetotal, $element);
                     } else {
-                        app.endGame('Allez retente ta chance !!!');
+                        app.endGame('Allez retente ta chance !!!', false);
                     }
                 }, 1000);
             }
         },
-        endGame: (text) => {
+        endGame: (text, win, time = 0) => {
             $('.end-game').css('display', 'flex');
             $('.end-game p').text(text);
             // on relance la partie
-            $('#end-game').on('click', () => location.reload());
+            $('#end-game').on('click', () => {
+                if (win) {
+                    app.saveScoreToDatabase(time);
+                } else {
+                    location.reload();
+                }
+            });
+        },
+        saveScoreToDatabase: (time) => {
+            const path = $('#save-score').data('path').replace(/.$/, time);
+
+            $.ajax({
+                url: path,
+                type: 'post',
+                success: ({res, error}) => {
+                    if (!error) {
+                        location.reload();
+                    } else if (error) {
+                        console.log('error');
+                    }
+                },
+                error: () => console.log('error')
+            });
         },
     };
 
