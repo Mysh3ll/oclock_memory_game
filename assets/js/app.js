@@ -20,6 +20,7 @@ $(document).ready(function () {
     const app = {
         cardValues: [1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014, 1001, 1002, 1003, 1004, 1005, 1006, 1007, 1008, 1009, 1010, 1011, 1012, 1013, 1014],
         startTime: 0,
+        timeout: 0,
 
         init: () => {
             app.shuffleCards();
@@ -83,7 +84,7 @@ $(document).ready(function () {
             const progressBarWidth = timeleft * $element.width() / timetotal;
             $element.find('div').animate({width: progressBarWidth}, 500).html(Math.floor(timeleft / 60) + ":" + timeleft % 60);
             if (timeleft >= 0) {
-                setTimeout(() => {
+                app.timeout = setTimeout(() => {
                     if (timeleft !== 0) {
                         app.progressBar(timeleft - 1, timetotal, $element);
                     } else {
@@ -93,6 +94,7 @@ $(document).ready(function () {
             }
         },
         endGame: (text, win, time = 0) => {
+            clearTimeout(app.timeout);
             $('.end-game').css('display', 'flex');
             $('.end-game p').text(text);
             // on relance la partie
