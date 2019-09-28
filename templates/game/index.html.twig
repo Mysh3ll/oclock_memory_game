@@ -3,12 +3,15 @@
 {% block title %}Hello GameController!{% endblock %}
 
 {% block content %}
+    {# Container pour les cartes #}
     <div class="container">
+        {# ProgressBar #}
         <div id="progress-bar">
             <div class="bar"></div>
         </div>
     </div>
 
+    {# Affichage des meilleurs scores #}
     <div class="top-scores">
         <h2>Top Scores</h2>
         <ul class="highscores">
@@ -25,11 +28,15 @@
         <input id="start-game" type="button" value="Start Game">
     </div>
 
+    {# Affichage en cas de fin de jeu gagnant ou perdant #}
     <div class="end-game">
         <h2>Fin de partie</h2>
+        {# paragraphe vide afin de le remplir via le javascript#}
         <p></p>
 
+        {# Boutton permettant de lancer une nouvelle partie #}
         <input id="end-game" type="button" value="Restart Game">
+        {# Input caché permettant de récupérer le bon path pour l'exécution de la requête ajax via le javascript #}
         <input id="save-score" type="hidden" data-path="{{ path('game_save_score', {'timeInSeconds': 0}) }}">
     </div>
 

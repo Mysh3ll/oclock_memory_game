@@ -1,8 +1,7 @@
 // Importation de font awesome
 @import '~@fortawesome/fontawesome-free/css/all.css';
 
-
-// Customisation des variables bootstrap
+// Customisation des variables bootstrap (pour exemple d'utilisation)
 $primary: #00c4a8;
 $secondary: #fefed8;
 $success: #acfca4;
@@ -138,7 +137,7 @@ h1 {
     height: 100%;
     text-align: right;
     padding: 0 10px;
-    line-height: 22px; /* same as #progressBar height if we want text middle aligned */
+    line-height: 22px;
     width: 0;
     background-color: $secondary;
     box-sizing: border-box;
