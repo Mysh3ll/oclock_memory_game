@@ -27,7 +27,7 @@ $(document).ready(function () {
         },
         startGame: () => {
             $('.container').show();
-            app.progressBar(300, 300, $('#progress-bar'));
+            app.progressBar(5, 5, $('#progress-bar'));
             app.clickHandlerCard();
             app.startTime = new Date();
             console.log(app.startTime);
@@ -86,7 +86,10 @@ $(document).ready(function () {
                     if (timeleft !== 0) {
                         app.progressBar(timeleft - 1, timetotal, $element);
                     } else {
-                        alert('fin');
+                        $('.end-game').css('display', 'flex');
+                        $('.end-game p').text('Allez retente ta chance !!!');
+                        // on relance la partie
+                        $('#end-game').on('click', () => location.reload());
                     }
                 }, 1000);
             }

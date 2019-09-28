@@ -69,7 +69,7 @@ h1 {
 }
 
 // Top scores
-.top-scores {
+.top-scores, .end-game {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -121,6 +121,10 @@ h1 {
       }
     }
   }
+}
+
+.end-game {
+  display: none;
 }
 
 // Progressbar
