@@ -75,7 +75,8 @@ $(document).ready(function () {
             if ($('.unselected').length === 0) {
                 const endTime = new Date();
                 const time = Math.round((endTime - app.startTime) / 1000);
-                console.log('Tu as gagné en ' + time + ' seconds');
+                app.endGame('Hey Good Job ! Tu as gagné en ' + time + ' secondes');
+                // console.log('Tu as gagné en ' + time + ' seconds');
             }
         },
         progressBar: (timeleft, timetotal, $element) => {
@@ -86,13 +87,16 @@ $(document).ready(function () {
                     if (timeleft !== 0) {
                         app.progressBar(timeleft - 1, timetotal, $element);
                     } else {
-                        $('.end-game').css('display', 'flex');
-                        $('.end-game p').text('Allez retente ta chance !!!');
-                        // on relance la partie
-                        $('#end-game').on('click', () => location.reload());
+                        app.endGame('Allez retente ta chance !!!');
                     }
                 }, 1000);
             }
+        },
+        endGame: (text) => {
+            $('.end-game').css('display', 'flex');
+            $('.end-game p').text(text);
+            // on relance la partie
+            $('#end-game').on('click', () => location.reload());
         },
     };
 
