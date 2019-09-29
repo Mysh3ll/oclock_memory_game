@@ -17,10 +17,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class GameController extends AbstractController
 {
     /**
-     * Controller pour la page d'accueil du jeu
+     * Controller pour la page d'accueil du jeu.
      *
      * @Route("", name="home")
+     *
      * @param ScoreRepository $scoreRepository
+     *
      * @return Response
      */
     public function home(ScoreRepository $scoreRepository)
@@ -36,19 +38,20 @@ class GameController extends AbstractController
 
     /**
      * Controller qui permet de gérer la requête ajax depuis le javascript
-     * pour sauvegarder le score en base de données
+     * pour sauvegarder le score en base de données.
      *
      * @Route("save-score/{timeInSeconds}", name="save_score", methods={"POST"}, requirements={"timeInSeconds"="\d+"})
-     * @param Request $request
+     *
+     * @param Request                $request
      * @param EntityManagerInterface $em
-     * @param int $timeInSeconds
+     * @param int                    $timeInSeconds
+     *
      * @return JsonResponse
      */
     public function saveScore(Request $request, EntityManagerInterface $em, int $timeInSeconds)
     {
         // On vérifie si la requête correspond à de l'ajax
         if ($request->isXmlHttpRequest()) {
-
             // Création de l'obejt Score
             $score = new Score();
             // Attribution du temps
@@ -60,13 +63,16 @@ class GameController extends AbstractController
             $em->flush();
 
             // On renvoie une réponse en json pour la requête ajax
+            $result['error'] = false;
             $result['message'] = 'Score sauvegardé';
-            return $this->json($result);
 
+            return $this->json($result);
         }
 
         // On renvoie une réponse en json pour la requête ajax
+        $result['error'] = true;
         $result['message'] = 'Une erreur s\'est produite';
+
         return $this->json($result);
     }
 }

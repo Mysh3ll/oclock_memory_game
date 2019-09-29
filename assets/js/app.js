@@ -132,11 +132,12 @@ $(document).ready(function () {
             $.ajax({
                 url: path,
                 type: 'post',
-                success: ({res, error}) => {
+                success: ({message, error}) => {
                     if (!error) {
+                        console.log(message);
                         location.reload();
                     } else if (error) {
-                        console.log('error');
+                        console.log(message);
                     }
                 },
                 error: () => console.log('error')
